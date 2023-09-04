@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package yourdailyword;
+
+import "Quote.proto";
+import "CalendarType.proto";
+import "GregorianCalendarOptions.proto";
+import "LunarCalendarOptions.proto";
+import "HebrewCalendarOptions.proto";
+
+option java_multiple_files = true;
+option java_package = "com.minkyu.yourdailyword.common.protos";
+option java_outer_classname = "QuotesProtos";
+
+message Quotes {
+    CalendarType type = 1;
+    repeated Quote values = 2;
+    optional GregorianCalendarOptions gregorian_calendar_options = 3;
+    optional LunarCalendarOptions lunar_calendar_options = 4;
+    optional HebrewCalendarOptions hebrew_calendar_options = 5;
+}

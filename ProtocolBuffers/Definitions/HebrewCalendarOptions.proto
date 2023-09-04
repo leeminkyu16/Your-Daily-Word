@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package yourdailyword;
+
+option java_multiple_files = true;
+option java_package = "com.minkyu.yourdailyword.common.protos";
+option java_outer_classname = "HebrewCalendarOptionsProto";
+
+message HebrewCalendarOptions {
+	bool adar_is_adar_1 = 1;
+    bool setting2 = 2;
+    bool setting3 = 3;
+}

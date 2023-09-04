@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="1000" height="1000" viewBox="0 0 264.58333 264.58333" version="1.1" id="svg5"
+   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+   <defs id="defs2">
+      <linearGradient id="linearGradient384">
+         <stop style="stop-color:#000000;stop-opacity:1;" offset="0" id="stop380" />
+         <stop style="stop-color:#000000;stop-opacity:0;" offset="1" id="stop382" />
+      </linearGradient>
+      <linearGradient xlink:href="#linearGradient384" id="linearGradient386" x1="104.30688" y1="84.749336"
+         x2="148.07851" y2="125.72704" gradientUnits="userSpaceOnUse" />
+   </defs>
+   <g id="layer1" style="display:inline;fill:url(#linearGradient386);fill-opacity:1">
+      <rect style="fill:#2196f3;stroke-width:0.264583;fill-opacity:1" id="rect456" width="264.58334" height="264.58334"
+         x="0" y="0" />
+      <g aria-label="H" id="text275"
+         style="font-size:204.717px;font-family:'Roboto Mono';-inkscape-font-specification:'Roboto Mono';fill:#ffffff;stroke-width:0.307075">
+         <path
+            d="M 179.5725,205.06216 V 59.521176 H 162.07959 V 122.0958 h -59.6758 V 59.521176 H 85.010843 V 205.06216 h 17.392947 v -67.27272 h 59.6758 v 67.27272 z"
+            id="path807" />
+      </g>
+   </g>
+</svg>

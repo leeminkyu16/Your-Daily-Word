@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package yourdailyword;
+
+import "MultilingualString.proto";
+import "QuoteGregorianCalendarOptions.proto";
+import "QuoteLunarCalendarOptions.proto";
+import "QuoteHebrewCalendarOptions.proto";
+
+option java_multiple_files = true;
+option java_package = "com.minkyu.yourdailyword.common.protos";
+option java_outer_classname = "QuoteProtos";
+
+message Quote {
+    int32 uid = 1;
+    MultilingualString value = 2;
+    int32 associatedMonth = 3;
+    int32 associatedDayOfMonth = 4;
+    optional QuoteGregorianCalendarOptions gregorianCalendarOptions = 5;
+    optional QuoteLunarCalendarOptions lunarCalendarOptions = 6;
+    optional QuoteHebrewCalendarOptions hebrewCalendarOptions = 7;
+}

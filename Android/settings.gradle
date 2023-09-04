@@ -1,0 +1,19 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Your-Daily-Word-Android"
+include ':app', ':Your-Daily-Word-Common'
+project(':Your-Daily-Word-Common').projectDir = new File("../Common");
