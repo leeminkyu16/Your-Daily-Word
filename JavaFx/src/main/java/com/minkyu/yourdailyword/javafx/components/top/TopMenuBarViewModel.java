@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class TopMenuBarViewModel extends YdwViewModel {
 
-	public ApplicationSharedState applicationSharedState;
+	public final ApplicationSharedState applicationSharedState;
 	private final IQuotesManager quotesManager;
 
 	@Inject

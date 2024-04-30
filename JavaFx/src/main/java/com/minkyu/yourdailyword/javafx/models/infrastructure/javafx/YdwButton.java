@@ -2,6 +2,7 @@ package com.minkyu.yourdailyword.javafx.models.infrastructure.javafx;
 
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwView;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwViewModel;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwStyleBundle;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -21,8 +22,13 @@ public class YdwButton extends Button implements YdwView {
 		super(value);
 	}
 
-	public YdwButton setOnMouseClickedWithThis(EventHandler<? super MouseEvent> value) {
+	public YdwButton setOnMouseClickedAndReturnThis(EventHandler<? super MouseEvent> value) {
 		super.setOnMouseClicked(value);
+		return this;
+	}
+
+	public YdwButton applyStyleBundleAndReturnThis(YdwStyleBundle styleBundle) {
+		styleBundle.apply(this);
 		return this;
 	}
 

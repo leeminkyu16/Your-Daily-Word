@@ -5,8 +5,9 @@ import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.minkyu.yourdailyword.common.calendar.*;
-import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualGridPaneView;
-import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualGridPaneViewModel;
+import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualScrollPaneView;
+import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualVBoxView;
+import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualVBoxViewModel;
 import com.minkyu.yourdailyword.javafx.components.center.edit.CenterEditQuotesRowGridPaneView;
 import com.minkyu.yourdailyword.javafx.components.center.edit.CenterEditQuotesRowGridPaneViewModel;
 import com.minkyu.yourdailyword.javafx.components.modals.createquotes.CreateQuotesStage;
@@ -52,13 +53,18 @@ public class ModelModules extends AbstractModule {
         );
         install(
             new FactoryModuleBuilder()
-                .implement(CenterEditIndividualGridPaneView.class, CenterEditIndividualGridPaneView.class)
-                .build(CenterEditIndividualGridPaneViewFactory.class)
+                .implement(CenterEditIndividualVBoxView.class, CenterEditIndividualVBoxView.class)
+                .build(CenterEditIndividualVBoxViewFactory.class)
         );
         install(
             new FactoryModuleBuilder()
-                .implement(CenterEditIndividualGridPaneViewModel.class, CenterEditIndividualGridPaneViewModel.class)
+                .implement(CenterEditIndividualVBoxViewModel.class, CenterEditIndividualVBoxViewModel.class)
                 .build(CenterEditIndividualGridPaneViewModelFactory.class)
+        );
+        install(
+            new FactoryModuleBuilder()
+                .implement(CenterEditIndividualScrollPaneView.class, CenterEditIndividualScrollPaneView.class)
+                .build(CenterEditIndividualScrollPaneViewFactory.class)
         );
         install(
             new FactoryModuleBuilder()

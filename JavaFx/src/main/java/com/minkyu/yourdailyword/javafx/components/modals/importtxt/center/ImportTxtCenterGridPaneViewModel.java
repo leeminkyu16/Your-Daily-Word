@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class ImportTxtCenterGridPaneViewModel extends YdwViewModel {
-	ImportTxtSharedState importTxtSharedState;
+	final ImportTxtSharedState importTxtSharedState;
 	private final IQuotesManager quotesManager;
 	private final IInternationalizationModel internationalizationModel;
 
-	public YdwObservable<File> selectedFile = new YdwObservable<>(null);
+	public final YdwObservable<File> selectedFile = new YdwObservable<>(null);
 
 	@Inject
 	public ImportTxtCenterGridPaneViewModel(

@@ -113,10 +113,37 @@ fun EditPageView(
 									bottom = 10.dp,
 								),
 							) {
+								Row(
+									modifier = Modifier
+										.fillMaxWidth(fraction = 1.0f),
+									horizontalArrangement = Arrangement.SpaceEvenly,
+								) {
+									Text(
+										modifier = Modifier,
+										text = stringResource(
+											id = R.string.month_colon_number,
+											item.associatedMonth,
+										),
+										style = YdwTheme.typography.smallerSecondaryText,
+									)
+									Text(
+										modifier = Modifier,
+										text = stringResource(
+											id = R.string.day_of_month_colon_number,
+											item.associatedDayOfMonth,
+										),
+										style = YdwTheme.typography.smallerSecondaryText,
+									)
+								}
 								Text(
-									modifier = Modifier,
+									modifier = Modifier
+										.padding(
+											horizontal = 0.dp,
+											vertical = 8.dp,
+										),
 									text = item.value.english,
 									maxLines = 2,
+									style = YdwTheme.typography.smallerPrimaryText,
 									overflow = TextOverflow.Ellipsis,
 								)
 								Row(
@@ -134,9 +161,9 @@ fun EditPageView(
 											color = YdwTheme.palette.primaryButtonText,
 										)
 									}
-									val successMessage =
+									val successMessage: String =
 										stringResource(R.string.delete_quote_success_message)
-									val failMessage =
+									val failMessage: String =
 										stringResource(R.string.delete_quote_fail_message)
 									SecondaryButton(
 										onClick = {

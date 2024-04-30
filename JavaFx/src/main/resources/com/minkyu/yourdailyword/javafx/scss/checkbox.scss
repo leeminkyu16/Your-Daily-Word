@@ -1,0 +1,23 @@
+@use 'colors' as colors;
+
+.primary-checkbox {
+  -fx-background-color: colors.$primary-background-color-light;
+
+  .box {
+    -fx-background-color: colors.$primary-background-color-light;
+    -fx-border-color: colors.$primary-border-color-light;
+    -fx-border-radius: 2px;
+  }
+
+  &:selected {
+    .box {
+      -fx-background-color: colors.$primary-indicator-color-light;
+      -fx-border-color: colors.$primary-indicator-color-light;
+      -fx-border-radius: 2px;
+    }
+
+    .mark {
+      -fx-background-color: colors.$primary-background-color-light;
+    }
+  }
+}

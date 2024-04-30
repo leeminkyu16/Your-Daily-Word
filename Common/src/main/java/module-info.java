@@ -1,5 +1,4 @@
 module com.minkyu.yourdailyword.common {
-    requires com.google.protobuf;
     requires com.ibm.icu;
     requires org.jetbrains.annotations;
     requires jakarta.inject;

@@ -15,7 +15,7 @@ import javafx.beans.property.StringProperty;
 public class CenterViewDateLabelViewModel extends YdwViewModel {
     private final IInternationalizationModel internationalizationModel;
     private final ICalendarModel calendarModel;
-    public StringProperty dateString = new SimpleStringProperty("");
+    public final StringProperty dateString = new SimpleStringProperty("");
 
     @Inject
     public CenterViewDateLabelViewModel(

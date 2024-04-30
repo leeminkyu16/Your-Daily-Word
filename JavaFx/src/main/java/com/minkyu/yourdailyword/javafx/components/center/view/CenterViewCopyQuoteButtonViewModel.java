@@ -12,7 +12,7 @@ import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwWeakReference;
 import javafx.beans.property.SimpleStringProperty;
 
 public class CenterViewCopyQuoteButtonViewModel extends YdwViewModel {
-	SimpleStringProperty quote = new SimpleStringProperty("");
+	final SimpleStringProperty quote = new SimpleStringProperty("");
 	private final ICalendarModel calendarModel;
 	private final IQuotesManager quotesManager;
 

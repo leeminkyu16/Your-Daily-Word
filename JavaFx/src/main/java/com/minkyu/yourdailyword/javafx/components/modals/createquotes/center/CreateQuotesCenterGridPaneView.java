@@ -4,12 +4,13 @@ import com.google.inject.Inject;
 import com.minkyu.yourdailyword.common.protobased.CalendarTypeModel;
 import com.minkyu.yourdailyword.common.protos.HebrewCalendarOptions;
 import com.minkyu.yourdailyword.javafx.models.IInternationalizationModel;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwButton;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwGridPane;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwObservable;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwStyleBundle;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ import java.util.Arrays;
 
 public class CreateQuotesCenterGridPaneView extends YdwGridPane {
 
-	CreateQuotesCenterGridPaneViewModel viewModel;
+	final CreateQuotesCenterGridPaneViewModel viewModel;
 
 	@Inject
 	public CreateQuotesCenterGridPaneView(
@@ -51,7 +52,16 @@ public class CreateQuotesCenterGridPaneView extends YdwGridPane {
 			true
 		);
 
-		Button createQuotesButton = new Button(internationalizationModel.getString("create_quotes_set"));
+		new YdwStyleBundle()
+			.addStyleClassAndReturnThis(YdwStyleBundle.StyleClasses.STANDARD_GRID_PANE)
+			.setPadding(8, 8, 8, 8)
+			.setVGap(8)
+			.apply(this);
+
+		YdwButton createQuotesButton = new YdwButton(internationalizationModel.getString("create_quotes_set"));
+		new YdwStyleBundle()
+			.addStyleClassAndReturnThis(YdwStyleBundle.StyleClasses.PRIMARY_BUTTON)
+			.apply(createQuotesButton);
 
 		this.add(new Label(internationalizationModel.getString("calendar_type")), 0, 0, 1, 1);
 		ComboBox<CalendarTypeModel> calendarTypeComboBox = new ComboBox<>(

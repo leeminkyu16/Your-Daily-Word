@@ -17,6 +17,30 @@ private val quoteText = TextStyle(
 	letterSpacing = 0.5.sp,
 )
 
+private val secondaryText = TextStyle(
+	fontFamily = FontFamily.Default,
+	fontWeight = FontWeight.Normal,
+	fontSize = 12.sp,
+	lineHeight = 16.sp,
+	letterSpacing = 0.5.sp,
+)
+
+private val smallerPrimaryText = TextStyle(
+	fontFamily = FontFamily.Default,
+	fontWeight = FontWeight.Normal,
+	fontSize = 14.sp,
+	lineHeight = 18.sp,
+	letterSpacing = 0.5.sp,
+)
+
+private val smallerSecondaryText = TextStyle(
+	fontFamily = FontFamily.Default,
+	fontWeight = FontWeight.Normal,
+	fontSize = 10.sp,
+	lineHeight = 14.sp,
+	letterSpacing = 0.5.sp,
+)
+
 private val settingsHeadingText = TextStyle(
 	fontFamily = FontFamily.Default,
 	fontWeight = FontWeight.Bold,
@@ -52,6 +76,9 @@ private val editIndividualHeadingText = TextStyle(
 @Immutable
 data class YdwCustomTypography(
 	val quote: TextStyle = TextStyle(),
+	val secondaryText: TextStyle = TextStyle(),
+	val smallerPrimaryText: TextStyle = TextStyle(),
+	val smallerSecondaryText: TextStyle = TextStyle(),
 	val settingsHeading: TextStyle = TextStyle(),
 	val settingsSubheading: TextStyle = TextStyle(),
 	val settingsMain: TextStyle = TextStyle(),
@@ -65,6 +92,9 @@ val LocalYdwCustomTypography: ProvidableCompositionLocal<YdwCustomTypography> =
 
 val DefaultYdwCustomTypography = YdwCustomTypography(
 	quote = quoteText,
+	secondaryText = secondaryText,
+	smallerPrimaryText = smallerPrimaryText,
+	smallerSecondaryText = smallerSecondaryText,
 	settingsHeading = settingsHeadingText,
 	settingsSubheading = settingsSubheadingText,
 	settingsMain = settingsMainText,

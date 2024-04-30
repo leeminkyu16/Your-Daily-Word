@@ -1,7 +1,6 @@
 package com.minkyu.yourdailyword.javafx;
 
 import com.google.inject.Injector;
-import com.minkyu.yourdailyword.common.calendar.LunarCalendarModel;
 import com.minkyu.yourdailyword.javafx.components.main.MainScene;
 import com.minkyu.yourdailyword.javafx.models.IInternationalizationModel;
 import com.minkyu.yourdailyword.javafx.models.di.InjectorSingleton;

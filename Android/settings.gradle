@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Your-Daily-Word-Android"
 include ':app', ':Your-Daily-Word-Common'
-project(':Your-Daily-Word-Common').projectDir = new File("../Common");
+project(':Your-Daily-Word-Common').projectDir = new File("../Common")

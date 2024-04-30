@@ -2,6 +2,7 @@ package com.minkyu.yourdailyword.javafx.models.infrastructure.javafx;
 
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwObservable;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwViewModel;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwStyleBundle;
 import javafx.scene.control.TextFormatter;
 
 import java.util.ArrayList;
@@ -38,5 +39,10 @@ public class YdwNumberTextField extends YdwTextField {
 				}
 			)
 		);
+	}
+
+	public YdwNumberTextField applyStyleBundleAndReturnThis(YdwStyleBundle styleBundle) {
+		styleBundle.apply(this);
+		return this;
 	}
 }

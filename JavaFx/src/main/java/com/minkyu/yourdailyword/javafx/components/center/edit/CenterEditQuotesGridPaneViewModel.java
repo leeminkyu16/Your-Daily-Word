@@ -16,10 +16,10 @@ public class CenterEditQuotesGridPaneViewModel extends YdwViewModel {
 	private final ISharedStateManager sharedStateManager;
 	public CenterEditSharedState sharedState;
 
-	public ArrayList<Runnable> updateViewRunnables = new ArrayList<>();
-	public ArrayList<Runnable> updateModelRunnables = new ArrayList<>();
-	public YdwObservable<Integer> baseQuoteIndex = new YdwObservable<>(0);
-	public ArrayList<YdwObservable<Integer>> quoteIndices = new ArrayList<>();
+	public final ArrayList<Runnable> updateViewRunnables = new ArrayList<>();
+	public final ArrayList<Runnable> updateModelRunnables = new ArrayList<>();
+	public final YdwObservable<Integer> baseQuoteIndex = new YdwObservable<>(0);
+	public final ArrayList<YdwObservable<Integer>> quoteIndices = new ArrayList<>();
 
 	@Inject
 	public CenterEditQuotesGridPaneViewModel(

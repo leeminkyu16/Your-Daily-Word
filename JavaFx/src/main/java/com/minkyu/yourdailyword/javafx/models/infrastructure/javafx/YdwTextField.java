@@ -3,6 +3,7 @@ package com.minkyu.yourdailyword.javafx.models.infrastructure.javafx;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwObservable;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwView;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.YdwViewModel;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwStyleBundle;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ public class YdwTextField extends TextField implements YdwView {
 		this.addBeforeDestroyRunnable(
 			stringYdwObservable.bind(this.textProperty())
 		);
+	}
+
+	public YdwTextField applyStyleBundleAndReturnThis(YdwStyleBundle styleBundle) {
+		styleBundle.apply(this);
+		return this;
 	}
 
 	@Override

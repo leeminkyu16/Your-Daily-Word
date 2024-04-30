@@ -6,7 +6,7 @@ import com.minkyu.yourdailyword.javafx.models.sharedstate.ApplicationSharedState
 import com.minkyu.yourdailyword.javafx.models.ISharedStateManager;
 
 public class CenterGridPaneViewModel extends YdwViewModel {
-	public ApplicationSharedState applicationSharedState;
+	public final ApplicationSharedState applicationSharedState;
 
 	@Inject
 	public CenterGridPaneViewModel(ISharedStateManager sharedStateManager) {

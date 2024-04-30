@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class YdwScene extends Scene implements YdwView {
 	private final AtomicReference<YdwViewModel> viewModel = new AtomicReference<>(null);
-	private ArrayList<Runnable> beforeDestroyRunnables = new ArrayList<>();
+	private final ArrayList<Runnable> beforeDestroyRunnables = new ArrayList<>();
 
 	public YdwScene(Parent root, double width, double height) {
 		super(root, width, height);
@@ -20,9 +20,7 @@ public class YdwScene extends Scene implements YdwView {
 			YdwWeakReference<YdwView> weakReference = new YdwWeakReference<>((YdwView) root);
 
 			this.addBeforeDestroyRunnable(() -> {
-				weakReference.doIfNotNull(weakRoot -> {
-					weakRoot.beforeDestroy();
-				});
+				weakReference.doIfNotNull(YdwView::beforeDestroy);
 			});
 		}
 	}

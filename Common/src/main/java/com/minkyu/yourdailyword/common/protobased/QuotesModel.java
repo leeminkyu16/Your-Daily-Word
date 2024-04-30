@@ -9,15 +9,15 @@ import java.util.stream.Collectors;
 
 public class QuotesModel implements ProtoBasedModel<Quotes> {
 	@NotNull
-	public CalendarTypeModel type;
+	public final CalendarTypeModel type;
 	@NotNull
-	public ArrayList<QuoteModel> values;
+	public final ArrayList<QuoteModel> values;
 	@Nullable
-	public GregorianCalendarOptionsModel gregorianCalendarOptionsModel;
+	public final GregorianCalendarOptionsModel gregorianCalendarOptionsModel;
 	@Nullable
-	public LunarCalendarOptionsModel lunarCalendarOptionsModel;
+	public final LunarCalendarOptionsModel lunarCalendarOptionsModel;
 	@Nullable
-	public HebrewCalendarOptionsModel hebrewCalendarOptionsModel;
+	public final HebrewCalendarOptionsModel hebrewCalendarOptionsModel;
 
 	public QuotesModel(
 		@NotNull CalendarTypeModel type,

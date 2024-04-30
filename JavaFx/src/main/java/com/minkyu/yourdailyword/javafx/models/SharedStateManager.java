@@ -6,9 +6,6 @@ import com.minkyu.yourdailyword.javafx.models.sharedstate.ApplicationSharedState
 import com.minkyu.yourdailyword.javafx.models.sharedstate.CenterEditSharedState;
 import com.minkyu.yourdailyword.javafx.models.sharedstate.ImportTxtSharedState;
 
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 public class SharedStateManager implements ISharedStateManager {
 	private final YdwWeakSingleton<ApplicationSharedState> applicationSharedState = new YdwWeakSingleton<>(
 		ApplicationSharedState::new

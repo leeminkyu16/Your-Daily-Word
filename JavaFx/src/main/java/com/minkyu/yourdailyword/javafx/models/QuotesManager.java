@@ -22,7 +22,7 @@ public class QuotesManager implements IQuotesManager {
 	private QuotesModel internalModel;
 	private final Map<Integer, QuoteModel> internalModelMap = new HashMap<>();
 
-	ArrayList<Runnable> afterQuotesUpdateRunnables = new ArrayList<>();
+	final ArrayList<Runnable> afterQuotesUpdateRunnables = new ArrayList<>();
 
 	@Inject
 	public QuotesManager(IDesktopIoModel ioModel) {

@@ -18,7 +18,7 @@ public class CenterViewQuoteTextAreaViewModel extends YdwViewModel {
 	private final ApplicationSharedState applicationSharedState;
 	private final IQuotesManager quotesManager;
 	private final ICalendarModel calendarModel;
-	SimpleStringProperty quote = new SimpleStringProperty("");
+	final SimpleStringProperty quote = new SimpleStringProperty("");
 	private final IInternationalizationModel internationalizationModel;
 
 	@Inject

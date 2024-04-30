@@ -3,9 +3,9 @@ package com.minkyu.yourdailyword.javafx.components.center;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.minkyu.yourdailyword.javafx.components.center.edit.CenterEditQuotesGridPaneView;
-import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualGridPaneView;
+import com.minkyu.yourdailyword.javafx.components.center.editindividual.CenterEditIndividualScrollPaneView;
 import com.minkyu.yourdailyword.javafx.components.center.view.CenterViewGridPaneView;
-import com.minkyu.yourdailyword.javafx.models.di.CenterEditIndividualGridPaneViewFactory;
+import com.minkyu.yourdailyword.javafx.models.di.CenterEditIndividualScrollPaneViewFactory;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwGridPane;
 import com.minkyu.yourdailyword.javafx.models.sharedstate.ApplicationSharedState;
 import javafx.geometry.HPos;
@@ -18,24 +18,24 @@ import java.util.function.Consumer;
 
 public class CenterGridPaneView extends YdwGridPane {
 	private final Injector injector;
-	private final CenterEditIndividualGridPaneViewFactory centerEditIndividualGridPaneViewFactory;
+	private final CenterEditIndividualScrollPaneViewFactory centerEditIndividualScrollPaneViewFactory;
 	@Nullable
 	private CenterViewGridPaneView centerViewGridPaneView;
 	@Nullable
 	private CenterEditQuotesGridPaneView centerEditQuotesGridPaneView;
 	@Nullable
-	private CenterEditIndividualGridPaneView centerEditIndividualGridPaneView;
+	private CenterEditIndividualScrollPaneView centerEditIndividualScrollPaneView;
 
 	@Inject
 	public CenterGridPaneView(
 		Injector injector,
-		CenterEditIndividualGridPaneViewFactory centerEditIndividualGridPaneViewFactory,
+		CenterEditIndividualScrollPaneViewFactory centerEditIndividualScrollPaneViewFactory,
 		CenterGridPaneViewModel viewModel
 	) {
 		super();
 		this.connectViewModel(viewModel);
 		this.injector = injector;
-		this.centerEditIndividualGridPaneViewFactory = centerEditIndividualGridPaneViewFactory;
+		this.centerEditIndividualScrollPaneViewFactory = centerEditIndividualScrollPaneViewFactory;
 
 		double[] widthPercentages = {
 			100,
@@ -72,11 +72,11 @@ public class CenterGridPaneView extends YdwGridPane {
 				weakThis.getChildren().remove(weakThis.centerEditQuotesGridPaneView);
 				weakThis.centerEditQuotesGridPaneView = null;
 
-				if (weakThis.centerEditIndividualGridPaneView != null) {
-					weakThis.centerEditIndividualGridPaneView.beforeDestroy();
+				if (weakThis.centerEditIndividualScrollPaneView != null) {
+					weakThis.centerEditIndividualScrollPaneView.beforeDestroy();
 				}
-				weakThis.getChildren().remove(weakThis.centerEditIndividualGridPaneView);
-				weakThis.centerEditIndividualGridPaneView = null;
+				weakThis.getChildren().remove(weakThis.centerEditIndividualScrollPaneView);
+				weakThis.centerEditIndividualScrollPaneView = null;
 
 
 				if (newCenterState instanceof ApplicationSharedState.CenterState.View) {
@@ -86,10 +86,10 @@ public class CenterGridPaneView extends YdwGridPane {
 					weakThis.centerEditQuotesGridPaneView = weakThis.injector.getInstance(CenterEditQuotesGridPaneView.class);
 					weakThis.add(weakThis.centerEditQuotesGridPaneView, 0, 0, 1, 1);
 				} else if (newCenterState instanceof ApplicationSharedState.CenterState.EditIndividual) {
-					weakThis.centerEditIndividualGridPaneView = weakThis.centerEditIndividualGridPaneViewFactory.create(
+					weakThis.centerEditIndividualScrollPaneView = weakThis.centerEditIndividualScrollPaneViewFactory.create(
 						((ApplicationSharedState.CenterState.EditIndividual) newCenterState).quoteId()
 					);
-					weakThis.add(weakThis.centerEditIndividualGridPaneView, 0, 0, 1, 1);
+					weakThis.add(weakThis.centerEditIndividualScrollPaneView, 0, 0, 1, 1);
 				}
 			}
 		};

@@ -3,15 +3,17 @@ package com.minkyu.yourdailyword.javafx.components.center.edit;
 import com.google.inject.Inject;
 import com.minkyu.yourdailyword.javafx.models.IInternationalizationModel;
 import com.minkyu.yourdailyword.javafx.models.di.CenterEditQuotesRowGridPaneViewFactory;
-import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwButton;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwGridPane;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwLabel;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwColorConstants;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwStyleBundle;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.styledcomponent.YdwPrimaryButton;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.layout.Priority;
 
 public class CenterEditQuotesGridPaneView extends YdwGridPane {
-	CenterEditQuotesGridPaneViewModel viewModel;
+	final CenterEditQuotesGridPaneViewModel viewModel;
 
 	@Inject
 	public CenterEditQuotesGridPaneView(
@@ -23,6 +25,9 @@ public class CenterEditQuotesGridPaneView extends YdwGridPane {
 		super();
 		this.viewModel = viewModel;
 		this.connectViewModel(viewModel);
+		new YdwStyleBundle()
+			.setBackgroundColor(YdwColorConstants.primaryBackgroundColorLight)
+			.apply(this);
 
 		int numOfColumns = 5;
 		int numOfRows = this.viewModel.sharedState.pageSize.get() + 3;
@@ -35,10 +40,10 @@ public class CenterEditQuotesGridPaneView extends YdwGridPane {
 		};
 		double[] widthPercentages = {
 			50,
-			15,
-			15,
 			10,
-			10
+			10,
+			15,
+			15
 		};
 		double[] heightPercentages = {
 			21,
@@ -80,8 +85,8 @@ public class CenterEditQuotesGridPaneView extends YdwGridPane {
 		}
 
 		this.add(
-			new YdwButton(internationalizationModel.getString("add_quote_title"))
-				.setOnMouseClickedWithThis(event -> viewModel.addQuote()),
+			new YdwPrimaryButton(internationalizationModel.getString("add_quote_title"))
+				.setOnMouseClickedAndReturnThis(event -> viewModel.addQuote()),
 			0,
 			numOfRows - 2,
 			numOfColumns,

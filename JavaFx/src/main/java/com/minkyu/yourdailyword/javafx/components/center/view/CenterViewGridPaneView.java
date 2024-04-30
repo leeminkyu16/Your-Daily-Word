@@ -2,6 +2,8 @@ package com.minkyu.yourdailyword.javafx.components.center.view;
 
 import com.google.inject.Inject;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwGridPane;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwColorConstants;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.style.YdwStyleBundle;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.layout.Priority;
@@ -14,6 +16,13 @@ public class CenterViewGridPaneView extends YdwGridPane {
 		CenterViewCopyQuoteButtonView centerViewQuoteCopyButtonView
 	) {
 		super();
+		this.setStyle(
+			new YdwStyleBundle()
+				.setBackgroundColor(YdwColorConstants.primaryBackgroundColorLight)
+				.setPadding(8, 8, 8, 8)
+				.buildStyleString()
+		);
+
 		double[] widthPercentages = {
 			100,
 		};

@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class CenterEditPaginationBarHBoxViewModel extends YdwViewModel {
-	CenterEditSharedState sharedState;
+	final CenterEditSharedState sharedState;
 
 	ArrayList<String> buttonsLabels = new ArrayList<>(List.of("←", "→"));
 	int paginationBarBaseIndex = 0;
 	int paginationBarOffset = 0;
 	int paginationBarLength = 0;
 	private int numOfPages = 0;
-	public MappedArrayList<String, Runnable> onUpdateLabels = new MappedArrayList<>();
+	public final MappedArrayList<String, Runnable> onUpdateLabels = new MappedArrayList<>();
 
 	@Inject
 	public CenterEditPaginationBarHBoxViewModel(

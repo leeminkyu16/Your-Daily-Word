@@ -74,7 +74,7 @@ fun ViewPageView(
 					uiState.monthText,
 					uiState.yearText,
 				),
-				fontSize = 12.sp,
+				style = YdwTheme.typography.secondaryText,
 				textAlign = TextAlign.Center,
 				color = YdwTheme.palette.primaryText,
 			)

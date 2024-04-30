@@ -33,6 +33,11 @@ public class YdwVBox extends VBox implements YdwView {
 		this.getChildren().addAll(child);
 	}
 
+	public YdwVBox setStyleAndReturnThis(String style) {
+		this.setStyle(style);
+		return this;
+	}
+
 	@Override
 	public void connectViewModel(YdwViewModel viewModel) {
 		this.connectViewModel(viewModel, beforeDestroyRunnables);

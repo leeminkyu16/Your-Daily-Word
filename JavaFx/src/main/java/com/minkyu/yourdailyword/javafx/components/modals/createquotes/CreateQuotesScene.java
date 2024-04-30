@@ -9,5 +9,6 @@ public class CreateQuotesScene extends YdwScene {
 		CreateQuotesBorderPaneView borderPaneView
 	) {
 		super(borderPaneView);
+		this.getStylesheets().add("com/minkyu/yourdailyword/javafx/css/main.css");
 	}
 }

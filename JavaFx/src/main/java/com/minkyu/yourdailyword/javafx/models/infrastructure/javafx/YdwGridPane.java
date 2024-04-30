@@ -11,6 +11,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class YdwGridPane extends GridPane implements YdwView {
 	private final ArrayList<Runnable> beforeDestroyRunnables = new ArrayList<>();
 
 	public void setColumnConstraints(
-		YdwObservable<double[]> widthWeights,
+		@NotNull YdwObservable<double[]> widthWeights,
 		HPos hAlignment
 	) {
 		this.setColumnConstraints(
@@ -55,6 +56,51 @@ public class YdwGridPane extends GridPane implements YdwView {
 		double[] widthWeights,
 		HPos hAlignment
 	) {
+		this.setColumnConstraints(
+			widthWeights,
+			hAlignment,
+			Priority.ALWAYS,
+			true
+		);
+	}
+
+	public void setColumnConstraints(
+		YdwObservable<double[]> widthWeights,
+		HPos hAlignment,
+		Priority hGrow,
+		boolean fillWidth
+	) {
+		this.setColumnConstraints(
+			widthWeights.get(),
+			hAlignment,
+			hGrow,
+			fillWidth
+		);
+
+		WeakReference<YdwGridPane> weakReference = new WeakReference<>(this);
+		this.addBeforeDestroyRunnable(
+			widthWeights.addAfterChange(
+				(oldValue, newValue) -> {
+					YdwGridPane weakThis = weakReference.get();
+					if (weakThis != null) {
+						weakThis.setColumnConstraints(
+							newValue,
+							hAlignment,
+							hGrow,
+							fillWidth
+						);
+					}
+				}
+			)
+		);
+	}
+
+	public void setColumnConstraints(
+		double[] widthWeights,
+		HPos hAlignment,
+		Priority hGrow,
+		boolean fillWidth
+	) {
 		this.getColumnConstraints().clear();
 
 		double totalWeight = Arrays.stream(widthWeights).sum();
@@ -63,6 +109,8 @@ public class YdwGridPane extends GridPane implements YdwView {
 			ColumnConstraints columnConstraints = new ColumnConstraints();
 			columnConstraints.setPercentWidth(widthWeight / totalWeight * 100);
 			columnConstraints.setHalignment(hAlignment);
+			columnConstraints.setHgrow(hGrow);
+			columnConstraints.setFillWidth(fillWidth);
 
 			this.getColumnConstraints().add(columnConstraints);
 		}

@@ -3,14 +3,14 @@ package com.minkyu.yourdailyword.javafx.components.center.edit;
 import com.google.inject.Inject;
 import com.minkyu.yourdailyword.javafx.models.IQuotesManager;
 import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.YdwHBox;
+import com.minkyu.yourdailyword.javafx.models.infrastructure.javafx.styledcomponent.YdwSecondaryButton;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 public class CenterEditPaginationBarHBoxView extends YdwHBox {
-	CenterEditPaginationBarHBoxViewModel viewModel;
+	final CenterEditPaginationBarHBoxViewModel viewModel;
 
 	@Inject
 	public CenterEditPaginationBarHBoxView(
@@ -56,7 +56,7 @@ public class CenterEditPaginationBarHBoxView extends YdwHBox {
 			HBox.setHgrow(spacer, Priority.ALWAYS);
 			this.getChildren().add(spacer);
 
-			Button button = new Button(buttonLabel);
+			YdwSecondaryButton button = new YdwSecondaryButton(buttonLabel);
 			switch (buttonLabel) {
 				case "←" -> button.setOnMouseClicked(
 					event -> viewModel.decrementIndex()
@@ -82,7 +82,7 @@ public class CenterEditPaginationBarHBoxView extends YdwHBox {
 					);
 				}
 			}
-			this.getChildren().add(button);
+			this.safeAddChildren(button);
 		}
 		if (!viewModel.buttonsLabels.isEmpty()) {
 			Region spacer = new Region();

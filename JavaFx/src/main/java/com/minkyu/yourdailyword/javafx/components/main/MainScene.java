@@ -13,5 +13,7 @@ public class MainScene extends YdwScene {
 			500,
 			350
 		);
+
+		this.getStylesheets().add("com/minkyu/yourdailyword/javafx/css/main.css");
 	}
 }

@@ -1,3 +1,3 @@
 rootProject.name = "Your-Daily-Word-JavaFx"
 include ':', ':Your-Daily-Word-Common'
-project(':Your-Daily-Word-Common').projectDir = new File("../Common");
+project(':Your-Daily-Word-Common').projectDir = new File("../Common")

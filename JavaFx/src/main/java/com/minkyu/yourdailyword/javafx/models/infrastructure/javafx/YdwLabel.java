@@ -30,6 +30,11 @@ public class YdwLabel extends Label implements YdwView {
 		return this;
 	}
 
+	public YdwLabel setStyleAndReturnThis(String style) {
+		this.setStyle(style);
+		return this;
+	}
+
 	private final AtomicReference<YdwViewModel> viewModel = new AtomicReference<>(null);
 	private final ArrayList<Runnable> beforeDestroyRunnables = new ArrayList<>();
 

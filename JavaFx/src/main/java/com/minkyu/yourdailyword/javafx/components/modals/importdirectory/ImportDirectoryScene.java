@@ -9,5 +9,6 @@ public class ImportDirectoryScene extends YdwScene {
 		ImportDirectoryBorderPaneView importTxtBorderPaneView
 	) {
 		super(importTxtBorderPaneView);
+		this.getStylesheets().add("com/minkyu/yourdailyword/javafx/css/main.css");
 	}
 }

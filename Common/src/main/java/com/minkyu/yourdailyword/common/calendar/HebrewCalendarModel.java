@@ -16,12 +16,12 @@ public class HebrewCalendarModel implements IHebrewCalendarModel {
     @Inject
     public HebrewCalendarModel() {}
 
-    HebrewCalendar internalCalendar = new HebrewCalendar(
+    final HebrewCalendar internalCalendar = new HebrewCalendar(
         TimeZone.getDefault(),
         Locale.getDefault()
     );
 
-    Map<Integer, String> hebrewCalendarMonthMap = Map.ofEntries(
+    final Map<Integer, String> hebrewCalendarMonthMap = Map.ofEntries(
         new AbstractMap.SimpleEntry<>(HebrewCalendar.TISHRI, "Tishri"),
         new AbstractMap.SimpleEntry<>(HebrewCalendar.HESHVAN, "Marẖeshvan"),
         new AbstractMap.SimpleEntry<>(HebrewCalendar.KISLEV, "Kislev"),
@@ -37,7 +37,7 @@ public class HebrewCalendarModel implements IHebrewCalendarModel {
         new AbstractMap.SimpleEntry<>(HebrewCalendar.ELUL, "Elul")
     );
 
-    Map<Integer, String> hebrewCalendarMonthKeyMap = Map.ofEntries(
+    final Map<Integer, String> hebrewCalendarMonthKeyMap = Map.ofEntries(
         new AbstractMap.SimpleEntry<>(HebrewCalendar.TISHRI, "tishri"),
         new AbstractMap.SimpleEntry<>(HebrewCalendar.HESHVAN, "heshvan"),
         new AbstractMap.SimpleEntry<>(HebrewCalendar.KISLEV, "kislev"),

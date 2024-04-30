@@ -43,6 +43,8 @@
     <string name="add_gregorian_options">Add Gregorian Options</string>
     <string name="add_lunar_calendar_options">Add Lunar Calendar Options</string>
     <string name="add_hebrew_calendar_options">Add Hebrew Calendar Options</string>
+    <string name="month_colon_number">Month: %d</string>
+    <string name="day_of_month_colon_number">Day of Month: %d</string>
     <string name="january">January</string>
     <string name="february">February</string>
     <string name="march">March</string>

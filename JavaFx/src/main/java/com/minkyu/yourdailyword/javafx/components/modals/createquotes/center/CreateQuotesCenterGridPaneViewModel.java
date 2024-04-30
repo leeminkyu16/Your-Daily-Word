@@ -8,7 +8,7 @@ import com.minkyu.yourdailyword.javafx.models.IQuotesManager;
 import com.minkyu.yourdailyword.common.protobased.CalendarTypeModel;
 
 public class CreateQuotesCenterGridPaneViewModel extends YdwViewModel {
-	IQuotesManager quotesManager;
+	final IQuotesManager quotesManager;
 
 	@Inject
 	public CreateQuotesCenterGridPaneViewModel(

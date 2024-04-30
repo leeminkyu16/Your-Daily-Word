@@ -12,18 +12,18 @@ import com.minkyu.yourdailyword.javafx.models.sharedstate.ApplicationSharedState
 
 public class CenterEditQuotesRowGridPaneViewModel extends YdwViewModel {
 
-	public ApplicationSharedState applicationSharedState;
+	public final ApplicationSharedState applicationSharedState;
 	private final IQuotesManager quotesManager;
 	private final YdwObservable<Integer> quoteIndex;
 
-	YdwObservable<String> quote = new YdwObservable<>("");
-	YdwObservable<Boolean> quoteDisable = new YdwObservable<>(false);
-	YdwObservable<Integer> month = new YdwObservable<>(0);
+	final YdwObservable<String> quote = new YdwObservable<>("");
+	final YdwObservable<Boolean> quoteDisable = new YdwObservable<>(false);
+	final YdwObservable<Integer> month = new YdwObservable<>(0);
 
-	YdwObservable<Boolean> monthDisable = new YdwObservable<>(false);
-	YdwObservable<Integer> dayOfMonth = new YdwObservable<>(0);
+	final YdwObservable<Boolean> monthDisable = new YdwObservable<>(false);
+	final YdwObservable<Integer> dayOfMonth = new YdwObservable<>(0);
 
-	YdwObservable<Boolean> dayOfMonthDisable = new YdwObservable<>(false);
+	final YdwObservable<Boolean> dayOfMonthDisable = new YdwObservable<>(false);
 
 	@Inject
 	public CenterEditQuotesRowGridPaneViewModel(

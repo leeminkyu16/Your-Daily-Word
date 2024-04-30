@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.List;
 
 public class TopMenuBarView extends YdwMenuBar {
-	TopMenuBarViewModel viewModel;
+	final TopMenuBarViewModel viewModel;
 
 	@Inject
 	public TopMenuBarView(

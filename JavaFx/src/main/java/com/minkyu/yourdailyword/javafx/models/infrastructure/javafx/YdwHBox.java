@@ -33,6 +33,11 @@ public class YdwHBox extends HBox implements YdwView {
 		this.getChildren().addAll(child);
 	}
 
+	public YdwHBox setStyleAndReturnThis(String newStyle) {
+		this.setStyle(newStyle);
+		return this;
+	}
+
 	@Override
 	public void connectViewModel(YdwViewModel viewModel) {
 		this.connectViewModel(viewModel, beforeDestroyRunnables);
