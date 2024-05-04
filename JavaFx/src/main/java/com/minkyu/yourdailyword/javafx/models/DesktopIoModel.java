@@ -1,5 +1,7 @@
 package com.minkyu.yourdailyword.javafx.models;
 
+import com.minkyu.yourdailyword.javafx.models.settings.FlagsSingleton;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,17 +11,25 @@ public class DesktopIoModel implements IDesktopIoModel {
 	private static final String APP_NAME = "Your Daily Word";
 
 	@Override
-	public void writeToLocalApplicationDataDirectory(String fileName, String fileContent) throws IOException {
-		writeToFile(Path.of(getLocalApplicationDataDirectoryBase(), APP_NAME, fileName), fileContent);
+	public void writeToLocalApplicationDataDirectory(
+		String fileName,
+		String fileContent
+	) throws IOException {
+		writeToFile(Path.of(getLocalApplicationDataDirectory(fileName)), fileContent);
 	}
 
 	@Override
-	public String readFromLocalApplicationDataDirectory(String fileName) throws IOException {
-		return readFromFile(Path.of(getLocalApplicationDataDirectoryBase(), APP_NAME, fileName));
+	public String readFromLocalApplicationDataDirectory(
+		String fileName
+	) throws IOException {
+		return readFromFile(Path.of(getLocalApplicationDataDirectory(fileName)));
 	}
 
 	@Override
-	public void writeToFile(Path filePath, String fileContent) throws IOException {
+	public void writeToFile(
+		Path filePath,
+		String fileContent
+	) throws IOException {
 		//noinspection ResultOfMethodCallIgnored
 		filePath.getParent().toFile().mkdirs();
 
@@ -31,7 +41,9 @@ public class DesktopIoModel implements IDesktopIoModel {
 	}
 
 	@Override
-	public String readFromFile(Path filePath) throws IOException {
+	public String readFromFile(
+		Path filePath
+	) throws IOException {
 		return Files.readString(
 			filePath
 		);
@@ -39,6 +51,16 @@ public class DesktopIoModel implements IDesktopIoModel {
 
 	@Override
 	public String getLocalApplicationDataDirectory(String fileName) {
+		if (FlagsSingleton.debug) {
+			return String.format(
+				"%s/%s/%s/%s",
+				getLocalApplicationDataDirectoryBase(),
+				APP_NAME,
+				"debug",
+				fileName
+			);
+		}
+
 		return String.format(
 			"%s/%s/%s",
 			getLocalApplicationDataDirectoryBase(),

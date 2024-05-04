@@ -54,23 +54,7 @@ public class CenterEditQuotesGridPaneViewModel extends YdwViewModel {
 			this.quoteIndices.add(integerYdwObservable);
 		}
 
-//        Quotes.Builder currentQuotesBuilder = Quotes.newBuilder();
-//        for (int i = 0; i < 50; i++) {
-//            currentQuotesBuilder.addValues(
-//                Quote.newBuilder()
-//                    .setValue(
-//                        MultilingualString.newBuilder()
-//                            .setEnglish(String.format("Test Quote String %d", i))
-//                            .build()
-//                    )
-//                    .setAssociatedMonth((5 + i) % 13)
-//                    .setAssociatedDayOfMonth((25 + i) % 30)
-//                    .setSkipOnLeapYear(i % 2 == 0)
-//                    .setSkipOnShortMonth(i % 2 == 1)
-//                    .build()
-//            );
-//        }
-//        this.quotesManager.setFromProto(currentQuotesBuilder.build());
+
 	}
 
 	public void addQuote() {

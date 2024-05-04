@@ -52,7 +52,11 @@ public class CenterEditIndividualVBoxView extends YdwVBox {
 					3.0
 				);
 				this.renderAddColumn(
-					new YdwTextField(viewModel.englishValue),
+					new YdwTextField(viewModel.englishValue)
+						.applyStyleBundleAndReturnThis(
+							new YdwStyleBundle()
+								.addStyleClassAndReturnThis(YdwStyleBundle.StyleClasses.ROUNDED_TEXT_BOX)
+						),
 					7.0
 				);
 			}
@@ -75,7 +79,11 @@ public class CenterEditIndividualVBoxView extends YdwVBox {
 					3.0
 				);
 				this.renderAddColumn(
-					new YdwNumberTextField(viewModel.monthValue),
+					new YdwNumberTextField(viewModel.monthValue)
+						.applyStyleBundleAndReturnThis(
+							new YdwStyleBundle()
+								.addStyleClassAndReturnThis(YdwStyleBundle.StyleClasses.ROUNDED_TEXT_BOX)
+						),
 					7.0
 				);
 			}
@@ -90,7 +98,11 @@ public class CenterEditIndividualVBoxView extends YdwVBox {
 					3.0
 				);
 				this.renderAddColumn(
-					new YdwNumberTextField(viewModel.dayOfMonthValue),
+					new YdwNumberTextField(viewModel.dayOfMonthValue)
+						.applyStyleBundleAndReturnThis(
+							new YdwStyleBundle()
+								.addStyleClassAndReturnThis(YdwStyleBundle.StyleClasses.ROUNDED_TEXT_BOX)
+						),
 					7.0
 				);
 			}

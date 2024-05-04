@@ -7,6 +7,8 @@ import com.minkyu.yourdailyword.common.calendar.IHebrewCalendarModel;
 import com.minkyu.yourdailyword.common.calendar.ILunarCalendarModel;
 import com.minkyu.yourdailyword.common.protobased.*;
 import com.minkyu.yourdailyword.common.protos.Quotes;
+import com.minkyu.yourdailyword.common.testing.QuotesTesting;
+import com.minkyu.yourdailyword.javafx.models.settings.FlagsSingleton;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -49,6 +51,10 @@ public class QuotesManager implements IQuotesManager {
 				null,
 				null
 			);
+		}
+
+		if (FlagsSingleton.debug && FlagsSingleton.generateDebugModel) {
+			this.internalModel = QuotesModel.fromProto(QuotesTesting.generateTestQuotes());
 		}
 	}
 

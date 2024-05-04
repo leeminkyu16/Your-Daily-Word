@@ -14,7 +14,8 @@
 - [Table of Contents](#table-of-contents)
 - [Technologies Used](#technologies-used)
 - [Screencapture](#screencapture)
-	- [Overview Example](#overview-example)
+	- [View Page Example](#view-page-example)
+	- [Edit Page Example](#edit-page-example)
 
 ## Technologies Used
 
@@ -125,12 +126,22 @@
 
 ## Screencapture
 
-### Overview Example
+### View Page Example
 
 <p align="center">
 	<img
-		src="./readme-assets/your-daily-word-javafx-overview.gif"
-		alt="Your Daily Word JavaFx Overview Example"
+		src="./readme-assets/Your-Daily-Word-View-Page.png"
+		alt="Your Daily Word JavaFx View Page Example"
+		width="50%"
+	/>
+</p>
+
+### Edit Page Example
+
+<p align="center">
+	<img
+		src="./readme-assets/Your-Daily-Word-Edit-Page.gif"
+		alt="Your Daily Word JavaFx Edit Page Example"
 		width="50%"
 	/>
 </p>
