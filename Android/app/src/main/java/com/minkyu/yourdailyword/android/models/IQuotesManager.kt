@@ -1,27 +1,20 @@
 package com.minkyu.yourdailyword.android.models
 
 import com.minkyu.yourdailyword.common.protobased.CalendarTypeModel
-import com.minkyu.yourdailyword.common.protobased.GregorianCalendarOptionsModel
-import com.minkyu.yourdailyword.common.protobased.HebrewCalendarOptionsModel
-import com.minkyu.yourdailyword.common.protobased.LunarCalendarOptionsModel
 import com.minkyu.yourdailyword.common.protobased.QuoteModel
+import com.minkyu.yourdailyword.common.protobased.QuotesModel
 import com.minkyu.yourdailyword.common.protos.Quotes
-import java.util.Locale
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Suppress("TooManyFunctions")
-interface IQuotesManager {
-	fun setFromProto(quotesProto: Quotes)
+interface IQuotesManager { val modelFlow: MutableStateFlow<QuotesModel?>
+	suspend fun setFromProto(quotesProto: Quotes)
 	fun getQuotesCalendarType(): CalendarTypeModel
 	fun getQuote(quoteId: Int): QuoteModel?
-	fun getQuoteBasedOnDayOfMonth(month: Int, dayOfMonth: Int, locale: Locale): String?
-	fun getGregorianCalendarOptions(): GregorianCalendarOptionsModel?
-	fun getLunarCalendarOptions(): LunarCalendarOptionsModel?
-	fun getHebrewCalendarOptions(): HebrewCalendarOptionsModel?
-	fun getQuoteList(): MutableList<QuoteModel>?
 	fun getProto(): Quotes?
-	fun deleteQuote(quoteId: Int)
-	fun updateQuote(quoteModel: QuoteModel)
+	suspend fun deleteQuote(quoteId: Int)
+	suspend fun updateQuote(quoteModel: QuoteModel)
 	suspend fun saveToDefaultFile()
-	fun addQuote(quoteModel: QuoteModel)
+	suspend fun addQuote(quoteModel: QuoteModel)
 	fun getNewUid(): Int
 }

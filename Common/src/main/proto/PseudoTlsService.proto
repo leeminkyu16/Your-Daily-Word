@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.minkyu.yourdailyword.common.protos";
+option java_outer_classname = "PseudoTlsServiceProto";
+
+package com.minkyu.yourdailyword.common.protos;
+
+service PseudoTlsService {
+	rpc GetPrivateKey (GetPrivateKeyRequest) returns (GetPrivateKeyResponse);
+	rpc ShareSymmetricKey (ShareSymmetricKeyRequest) returns (ShareSymmetricKeyResponse);
+}
+
+message GetPrivateKeyRequest {}
+
+message GetPrivateKeyResponse {
+	bytes privateKey = 1;
+}
+
+message ShareSymmetricKeyRequest {
+	bytes symmetricKey = 1;
+}
+
+message ShareSymmetricKeyResponse {
+	bool success = 1;
+}

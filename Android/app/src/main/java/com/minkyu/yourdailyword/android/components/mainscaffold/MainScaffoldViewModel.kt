@@ -9,9 +9,12 @@ import androidx.navigation.NavHostController
 import com.minkyu.yourdailyword.android.services.IIoService
 import com.minkyu.yourdailyword.android.models.IQuotesManager
 import com.minkyu.yourdailyword.android.models.NavigationDestination
+import com.minkyu.yourdailyword.android.models.QuotesManager
+import com.minkyu.yourdailyword.android.services.IFlagsService
 import com.minkyu.yourdailyword.android.services.INavigationService
 import com.minkyu.yourdailyword.android.services.ISnackbarService
 import com.minkyu.yourdailyword.common.protos.Quotes
+import com.minkyu.yourdailyword.common.testing.QuotesTesting
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +24,7 @@ import javax.inject.Inject
 class MainScaffoldViewModel @Inject constructor(
 	quotesManager: IQuotesManager,
 	ioService: IIoService,
+	flagsService: IFlagsService,
 	private val navigationService: INavigationService,
 	private val snackbarService: ISnackbarService,
 ) : ViewModel() {
@@ -32,9 +36,10 @@ class MainScaffoldViewModel @Inject constructor(
 	init {
 		viewModelScope.launch(Dispatchers.IO) {
 			if (
-				ioService.appSpecificFileExists("default.ydw")
+				!flagsService.debug.get() &&
+				ioService.appSpecificFileExists(QuotesManager.DEFAULT_FILE_PATH)
 			) {
-				ioService.getAppSpecificFileInputStream("default.ydw").use {
+				ioService.getAppSpecificFileInputStream(QuotesManager.DEFAULT_FILE_PATH).use {
 					val quotesProto = Quotes.parseDelimitedFrom(
 						it
 					)
@@ -44,6 +49,25 @@ class MainScaffoldViewModel @Inject constructor(
 						)
 					}
 				}
+			}
+			else if (
+				flagsService.debug.get() &&
+				ioService.appSpecificFileExists(QuotesManager.DEBUG_DEFAULT_FILE_PATH)
+			) {
+				ioService.getAppSpecificFileInputStream(QuotesManager.DEBUG_DEFAULT_FILE_PATH).use {
+					val quotesProto = Quotes.parseDelimitedFrom(
+						it
+					)
+					if (quotesProto != null) {
+						quotesManager.setFromProto(
+							quotesProto
+						)
+					}
+				}
+			}
+			else if (flagsService.debug.get() && flagsService.generateDebugModel.get()) {
+				quotesManager.setFromProto(QuotesTesting.generateTestQuotes())
+				quotesManager.saveToDefaultFile()
 			}
 		}
 	}

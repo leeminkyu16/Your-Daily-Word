@@ -7,6 +7,12 @@ import kotlinx.coroutines.CoroutineScope
 interface ISnackbarService {
 	val snackbarHostState: SnackbarHostState
 	fun showMessage(
+		messageStringRes: Int,
+		actionLabel: String? = null,
+		duration: SnackbarDuration = SnackbarDuration.Long,
+		withDismissAction: Boolean = duration != SnackbarDuration.Short,
+	)
+	fun showMessage(
 		message: String = "",
 		actionLabel: String? = null,
 		duration: SnackbarDuration = SnackbarDuration.Long,

@@ -92,6 +92,16 @@ public class GregorianCalendarModel implements IGregorianCalendarModel {
     }
 
     @Override
+    public String monthIntToMonthText(int month) {
+        return gregorianCalendarMonthMap.get(month);
+    }
+
+    @Override
+    public String monthIntToMonthKey(int month) {
+        return gregorianCalendarMonthKeyMap.get(month);
+    }
+
+    @Override
     public int getYear() {
         return internalCalendar.get(Calendar.YEAR);
     }

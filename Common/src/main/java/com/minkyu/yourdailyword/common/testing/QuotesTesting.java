@@ -2,6 +2,8 @@ package com.minkyu.yourdailyword.common.testing;
 
 import com.minkyu.yourdailyword.common.protos.*;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -9,6 +11,8 @@ import java.util.Random;
 
 public class QuotesTesting {
     public static Quotes generateTestQuotes() {
+        int currentUid = 0;
+
         Quotes.Builder currentQuotesBuilder = Quotes
             .newBuilder()
             .setType(CalendarType.LUNAR_BASED);
@@ -17,6 +21,7 @@ public class QuotesTesting {
                 currentQuotesBuilder
                     .addValues(
                         Quote.newBuilder()
+                            .setUid(currentUid++)
                             .setValue(
                                 MultilingualString.newBuilder()
                                     .setEnglish(
@@ -44,7 +49,9 @@ public class QuotesTesting {
             }
         }
 
-        return currentQuotesBuilder.build();
+        return currentQuotesBuilder
+            .setLastModified(System.currentTimeMillis())
+            .build();
     }
 
     static private String generateRandomLoremIpsum() {
@@ -57,23 +64,24 @@ public class QuotesTesting {
         };
         int quoteFileIndex = new Random().nextInt(quotesFiles.length);
 
-        try {
-            InputStream inputStream = Thread
-                .currentThread()
-                .getContextClassLoader()
-                .getResourceAsStream(
-                   quotesFiles[quoteFileIndex]
-                );
-
+        try (
+                InputStream inputStream = Thread
+                    .currentThread()
+                    .getContextClassLoader()
+                    .getResourceAsStream(
+                        quotesFiles[quoteFileIndex]
+                    )
+        ) {
             if (inputStream != null) {
-                loremIpsumText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8).split("\\s+");
+                byte[] inputBytes = IOUtils.toByteArray(inputStream);
+                loremIpsumText = new String(inputBytes, StandardCharsets.UTF_8).split("\\s+");
             }
         }
         catch(IOException ignored) {
             return "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         }
 
-        int numberOfWords = new Random().nextInt(10, 100);
+        int numberOfWords = (new Random().nextInt(90)) + 10;
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < numberOfWords && i < loremIpsumText.length; i++) {

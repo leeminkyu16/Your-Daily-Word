@@ -2,6 +2,7 @@ package com.minkyu.yourdailyword.android.pages.addindividualpage
 
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import com.minkyu.yourdailyword.android.R
 import com.minkyu.yourdailyword.android.infrastructure.YdwViewModel
 import com.minkyu.yourdailyword.android.infrastructure.combine
 import com.minkyu.yourdailyword.android.models.IQuotesManager
@@ -86,15 +87,13 @@ class AddIndividualPageViewModel @Inject constructor(
 
 	fun onAddAndSave(
 		uiState: AddIndividualPageUiState.Loaded,
-		onSuccessMessage: String,
-		onFailureMessage: String,
 	) {
 		viewModelScope.launch(Dispatchers.Default) {
-			var assoicatedMonth = 0
+			var associatedMonth = 0
 			var associatedDayOfMonth = 0
 			runCatching {
 				assert(uiState.englishQuoteText.isNotBlank())
-				assoicatedMonth = uiState.associatedMonthText.toInt()
+				associatedMonth = uiState.associatedMonthText.toInt()
 				associatedDayOfMonth = uiState.associatedDayOfMonthText.toInt()
 			}
 				.onSuccess {
@@ -104,7 +103,7 @@ class AddIndividualPageViewModel @Inject constructor(
 							MultilingualStringModel(
 								uiState.englishQuoteText,
 							),
-							assoicatedMonth,
+							associatedMonth,
 							associatedDayOfMonth,
 							uiState.gregorianCalendarOptionsModel,
 							uiState.lunarCalendarOptionsModel,
@@ -117,7 +116,7 @@ class AddIndividualPageViewModel @Inject constructor(
 					}
 
 					snackbarService.showMessage(
-						onSuccessMessage,
+						messageStringRes = R.string.add_quote_success_message,
 					)
 					withContext(Dispatchers.Main) {
 						navHostController.popBackStack()
@@ -125,7 +124,7 @@ class AddIndividualPageViewModel @Inject constructor(
 				}
 				.onFailure {
 					snackbarService.showMessage(
-						onFailureMessage,
+						messageStringRes = R.string.add_quote_failure_message,
 					)
 				}
 		}

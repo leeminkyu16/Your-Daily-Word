@@ -119,6 +119,16 @@ public class LunarCalendarModel implements ILunarCalendarModel {
 	}
 
 	@Override
+	public String monthIntToMonthText(int month) {
+		return lunarCalendarMonthMap.get(month);
+	}
+
+	@Override
+	public String monthIntToMonthKey(int month) {
+		return lunarCalendarMonthKeyMap.get(month);
+	}
+
+	@Override
 	public int getYear() {
 		return internalCalendar.get(com.ibm.icu.util.Calendar.YEAR);
 	}

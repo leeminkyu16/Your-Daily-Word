@@ -1,0 +1,33 @@
+@use 'color-constants' as colors;
+
+.root {
+  -primary-indicator-color: colors.$primary-indicator-color-dark;
+
+  -primary-indicator-highlighted-color: colors.$primary-indicator-highlighted-color-dark;
+
+  -secondary-indicator-color: colors.$secondary-indicator-color-dark;
+
+  -secondary-indicator-highlighted-color: colors.$secondary-indicator-highlighted-color-dark;
+
+  -primary-text-color: colors.$primary-text-color-dark;
+
+  -secondary-text-color: colors.$secondary-text-color-dark;
+
+  -primary-background-color: colors.$primary-background-color-dark;
+
+  -secondary-background-color: colors.$secondary-background-color-dark;
+
+  -primary-shadow-color: colors.$primary-shadow-color-dark;
+
+  -primary-button-text-color: colors.$primary-button-text-color-dark;
+
+  -secondary-button-background-color: colors.$secondary-button-background-color-dark;
+
+  -secondary-button-text-color: colors.$secondary-button-text-color-dark;
+
+  -text-field-background-color: colors.$text-field-background-color-dark;
+
+  -secondary-border-color: colors.$secondary-border-color-dark;
+
+  -primary-border-color: colors.$primary-border-color-dark;
+}

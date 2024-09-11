@@ -61,7 +61,7 @@ public class HebrewCalendarModel implements IHebrewCalendarModel {
 
     @Override
     public int getDayOfMonth() {
-        return internalCalendar.get(Calendar.DAY_OF_MONTH);
+        return internalCalendar.get(com.ibm.icu.util.Calendar.DAY_OF_MONTH);
     }
 
     @Override
@@ -107,6 +107,16 @@ public class HebrewCalendarModel implements IHebrewCalendarModel {
         }
 
         return hebrewCalendarMonthKeyMap.get(internalCalendar.get(Calendar.MONTH));
+    }
+
+    @Override
+    public String monthIntToMonthText(int month) {
+        return hebrewCalendarMonthMap.get(month);
+    }
+
+    @Override
+    public String monthIntToMonthKey(int month) {
+        return hebrewCalendarMonthKeyMap.get(month);
     }
 
     @Override

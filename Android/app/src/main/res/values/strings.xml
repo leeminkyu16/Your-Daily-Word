@@ -20,7 +20,7 @@
     <string name="save">Save</string>
     <string name="go_back">Go Back</string>
     <string name="no_quote_found">No Quote Found</string>
-    <string name="delete_quote_fail_message">Failed to delete quote.</string>
+    <string name="delete_quote_failure_message">Failed to delete quote.</string>
     <string name="delete_quote_success_message">Successfully deleted quote.</string>
     <string name="import_quote_success_message">Successfully imported quotes.</string>
     <string name="import_quote_failure_message">Failed to import quotes.</string>
@@ -43,8 +43,8 @@
     <string name="add_gregorian_options">Add Gregorian Options</string>
     <string name="add_lunar_calendar_options">Add Lunar Calendar Options</string>
     <string name="add_hebrew_calendar_options">Add Hebrew Calendar Options</string>
-    <string name="month_colon_number">Month: %d</string>
-    <string name="day_of_month_colon_number">Day of Month: %d</string>
+    <string name="month_colon_number">Month: %s</string>
+    <string name="day_of_month_colon_number">Day of Month: %s</string>
     <string name="january">January</string>
     <string name="february">February</string>
     <string name="march">March</string>
@@ -82,5 +82,9 @@
     <string name="jiǔYuè">JiǔYuè</string> 
     <string name="shíYuè">ShíYuè</string> 
     <string name="dōngYuè">DōngYuè</string> 
-    <string name="làYuè">LàYuè</string> 
+    <string name="làYuè">LàYuè</string>
+    <string name="share_quote">Share Quote</string>
+    <string name="search">Search</string>
+    <string name="sync_quotes_with_qr_code">Sync Quotes with QR Code</string>
+    <string name="quote_sync_server_failure_message">Failed to sync quotes with the server. Please try again later.</string>
 </resources>

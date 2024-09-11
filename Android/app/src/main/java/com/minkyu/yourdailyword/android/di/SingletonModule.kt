@@ -3,6 +3,7 @@ package com.minkyu.yourdailyword.android.di
 import android.content.Context
 import com.minkyu.yourdailyword.android.models.IQuotesManager
 import com.minkyu.yourdailyword.android.models.QuotesManager
+import com.minkyu.yourdailyword.android.services.IFlagsService
 import com.minkyu.yourdailyword.android.services.IIoService
 import com.minkyu.yourdailyword.android.services.INavigationService
 import com.minkyu.yourdailyword.android.services.ISettingsService
@@ -22,9 +23,13 @@ import javax.inject.Singleton
 object SingletonModule {
 	@Singleton
 	@Provides
-	fun providesIQuotesManager(ioService: IIoService): IQuotesManager {
+	fun providesIQuotesManager(
+		ioService: IIoService,
+		flagsService: IFlagsService,
+	): IQuotesManager {
 		return QuotesManager(
 			ioService = ioService,
+			flagsService = flagsService,
 		)
 	}
 

@@ -1,0 +1,23 @@
+@use 'color-constants' as colors;
+
+.primary-button {
+    -fx-background-color: -primary-indicator-color;
+    -fx-text-fill: -primary-button-text-color;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+
+    &:hover {
+        -fx-background-color: -primary-indicator-highlighted-color;
+    }
+}
+
+.secondary-button {
+    -fx-background-color: -secondary-indicator-color;
+    -fx-text-fill: -secondary-button-text-color;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+
+    &:hover {
+        -fx-background-color: -secondary-indicator-highlighted-color;
+    }
+}

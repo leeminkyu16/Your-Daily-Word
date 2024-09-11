@@ -29,7 +29,7 @@ import com.minkyu.yourdailyword.android.components.switch.PrimarySwitch
 import com.minkyu.yourdailyword.android.ui.theme.YdwTheme
 
 @Composable
-@Suppress("FunctionNaming")
+@Suppress("FunctionNaming", "LongMethod")
 fun SettingsPageView(
 	modifier: Modifier = Modifier,
 	viewModel: SettingsPageViewModel = hiltViewModel(),
@@ -37,15 +37,11 @@ fun SettingsPageView(
 		initial = SettingsPageUiState.Loading,
 	).value,
 ) {
-	val successString: String = stringResource(R.string.import_quote_success_message)
-	val failureString: String = stringResource(R.string.import_quote_failure_message)
 	val pickImportQuoteFileLauncher = rememberLauncherForActivityResult(
 		contract = ActivityResultContracts.GetContent(),
 	) {
 		viewModel.readQuotesProtoFromInputStream(
 			uri = it,
-			onSuccessText = successString,
-			onFailureText = failureString,
 		)
 	}
 
@@ -147,6 +143,18 @@ fun SettingsPageView(
 			) {
 				Text(
 					text = stringResource(R.string.import_quotes),
+					color = YdwTheme.palette.secondaryButtonText,
+				)
+			}
+
+			SecondaryButton(
+				modifier = Modifier.fillMaxWidth(fraction = 1.0f),
+				onClick = {
+					viewModel.onSyncQuotesButtonClicked()
+				}
+			) {
+				Text(
+					text = stringResource(R.string.sync_quotes_with_qr_code),
 					color = YdwTheme.palette.secondaryButtonText,
 				)
 			}

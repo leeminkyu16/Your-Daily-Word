@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package yourdailyword;
+
+import "Quotes.proto";
+
+option java_multiple_files = true;
+option java_package = "com.minkyu.yourdailyword.common.protos";
+option java_outer_classname = "SyncQuotesServiceProto";
+
+service SyncQuotesService {
+	rpc GetDeviceName (GetDeviceNameRequest) returns (GetDeviceNameResponse) {}
+	rpc SyncQuotes (SyncQuotesRequest) returns (SyncQuotesResponse) {}
+}
+
+message GetDeviceNameRequest {
+	string senderDeviceId = 1;
+}
+
+message GetDeviceNameResponse {
+	string senderDeviceId = 1;
+	string receiverDeviceId = 2;
+}
+
+message SyncQuotesRequest {
+	Quotes quotes = 1;
+}
+
+message SyncQuotesResponse {
+	Quotes quotes = 1;
+	bool update = 2;
+}

@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.minkyu.yourdailyword.android.R
 import com.minkyu.yourdailyword.android.components.button.PrimaryButton
 import com.minkyu.yourdailyword.android.models.QuotesManager
+import com.minkyu.yourdailyword.android.services.FlagsService
 import com.minkyu.yourdailyword.android.services.IoService
 import com.minkyu.yourdailyword.android.ui.theme.YdwAndroidTheme
 import com.minkyu.yourdailyword.android.ui.theme.YdwTheme
@@ -33,7 +34,7 @@ import com.minkyu.yourdailyword.common.calendar.GregorianCalendarModel
 import com.minkyu.yourdailyword.common.calendar.HebrewCalendarModel
 import com.minkyu.yourdailyword.common.calendar.LunarCalendarModel
 
-@Suppress("FunctionNaming")
+@Suppress("FunctionNaming", "LongMethod")
 @Composable
 fun ViewPageView(
 	modifier: Modifier = Modifier,
@@ -90,10 +91,12 @@ fun ViewPageView(
 				textAlign = TextAlign.Center,
 				color = YdwTheme.palette.primaryText,
 			)
+
 			Spacer(
 				modifier = Modifier
 					.height(20.dp),
 			)
+
 			PrimaryButton(
 				modifier = Modifier
 					.fillMaxWidth(fraction = 1.0f),
@@ -107,6 +110,22 @@ fun ViewPageView(
 			) {
 				Text(
 					text = stringResource(R.string.copy_quote),
+					fontSize = 15.sp,
+					color = YdwTheme.palette.primaryButtonText,
+				)
+			}
+
+			PrimaryButton(
+				modifier = Modifier
+					.fillMaxWidth(fraction = 1.0f),
+				onClick = {
+					uiState.quote?.let { quote ->
+						viewModel.onShareQuoteButtonTapped(quote=quote)
+					}
+				}
+			) {
+				Text(
+					text = stringResource(R.string.share_quote),
 					fontSize = 15.sp,
 					color = YdwTheme.palette.primaryButtonText,
 				)
@@ -126,6 +145,7 @@ fun ViewPageViewPreview() {
 			viewModel = ViewPageViewModel(
 				quotesManager = QuotesManager(
 					ioService = IoService(context = LocalContext.current),
+					flagsService = FlagsService(),
 				),
 				lazyGregorianCalendarModel = {
 					GregorianCalendarModel()
@@ -135,7 +155,8 @@ fun ViewPageViewPreview() {
 				},
 				lazyHebrewCalendarModel = {
 					HebrewCalendarModel()
-				}
+				},
+				context = LocalContext.current,
 			),
 			uiState = ViewPageUiState.Loading,
 		)

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'java-library'
+    id 'com.google.protobuf' version '0.9.4'
 }
 
 group 'com.minkyu.yourdailyword'
@@ -10,8 +11,6 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 //noinspection GroovyAssignabilityCheck
 tasks.withType(JavaCompile).configureEach {
@@ -19,12 +18,41 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 dependencies {
-    implementation 'org.jetbrains:annotations:24.0.0'
-    implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
-    implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '3.21.12'
-    implementation group: 'com.ibm.icu', name: 'icu4j', version: '72.1'
+    implementation group: 'org.jetbrains', name: 'annotations', version: '24.1.0'
+    implementation group: 'jakarta.inject', name: 'jakarta.inject-api', version: '2.0.1.MR'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.16.1'
+
+    implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '4.27.0'
+    implementation group: 'com.google.protobuf', name: 'protobuf-java-util', version: '4.27.0'
+    implementation 'org.jetbrains:annotations:24.1.0'
+
+    implementation group: 'io.grpc', name: 'grpc-protobuf', version: '1.66.0' exclude group: 'javax.annotation', module: 'javax.annotation-api'
+    implementation group: 'io.grpc', name: 'grpc-stub', version: '1.66.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
+    implementation group: 'com.ibm.icu', name: 'icu4j', version: '74.1'
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:4.27.0'
+    }
+    plugins {
+        create("grpc") {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.66.0'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                create("grpc") {
+                    option '@generated=omit'
+                }
+            }
+            task.builtins {}
+        }
+    }
 }
 
 test {

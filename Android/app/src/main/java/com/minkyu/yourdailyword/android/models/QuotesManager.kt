@@ -1,35 +1,55 @@
 package com.minkyu.yourdailyword.android.models
 
+import com.minkyu.yourdailyword.android.services.IFlagsService
 import com.minkyu.yourdailyword.android.services.IIoService
 import com.minkyu.yourdailyword.common.protobased.CalendarTypeModel
-import com.minkyu.yourdailyword.common.protobased.GregorianCalendarOptionsModel
-import com.minkyu.yourdailyword.common.protobased.HebrewCalendarOptionsModel
-import com.minkyu.yourdailyword.common.protobased.LunarCalendarOptionsModel
 import com.minkyu.yourdailyword.common.protobased.QuoteModel
 import com.minkyu.yourdailyword.common.protobased.QuotesModel
 import com.minkyu.yourdailyword.common.protos.Quotes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import java.io.FileOutputStream
-import java.util.Locale
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
 class QuotesManager @Inject constructor(
 	private val ioService: IIoService,
+	private val flagsService: IFlagsService,
 ) : IQuotesManager {
-	private var internalModel: QuotesModel? = null
+	override var modelFlow: MutableStateFlow<QuotesModel?> = MutableStateFlow(null)
 	private var internalModelMap: MutableMap<Int, QuoteModel> = mutableMapOf()
+
+	private val job = Job()
+	private val scope = CoroutineScope(Dispatchers.Default + job)
+
+	init {
+		modelFlow
+			.filterNotNull()
+			.drop(1) // Drop the value being loaded from file
+			.onEach {
+				modelFlow.value?.lastModified = System.currentTimeMillis()
+			}
+			.launchIn(scope)
+	}
 
 	override fun getProto(): Quotes? {
 		synchronized(this) {
-			return internalModel?.toProto()
+			return modelFlow.value?.toProto()
 		}
 	}
 
-	override fun setFromProto(quotesProto: Quotes) {
+	override suspend fun setFromProto(quotesProto: Quotes) {
+		val newQuotesModel: QuotesModel = QuotesModel.fromProto(quotesProto)
+		modelFlow.emit(newQuotesModel)
 		synchronized(this) {
-			internalModel = QuotesModel.fromProto(quotesProto)
 			internalModelMap.clear()
-			internalModel?.values?.forEach {
+			newQuotesModel.values.forEach {
 				internalModelMap[it.uid] = it
 			}
 		}
@@ -37,7 +57,7 @@ class QuotesManager @Inject constructor(
 
 	override fun getQuotesCalendarType(): CalendarTypeModel {
 		synchronized(this) {
-			return this.internalModel?.type ?: CalendarTypeModel.NOT_SPECIFIED
+			return this.modelFlow.value?.type ?: CalendarTypeModel.NOT_SPECIFIED
 		}
 	}
 
@@ -50,91 +70,72 @@ class QuotesManager @Inject constructor(
 		}
 	}
 
-	override fun addQuote(quoteModel: QuoteModel) {
+	override suspend fun addQuote(quoteModel: QuoteModel) {
 		synchronized(this) {
-			this.internalModel?.values?.add(quoteModel)
 			this.internalModelMap.put(
 				key = quoteModel.uid,
 				value = quoteModel,
 			)
 		}
+
+		this.modelFlow.emit(
+			this.modelFlow.value?.apply {
+				values.add(quoteModel)
+			}
+		)
 	}
 
 	override fun getNewUid(): Int {
-		if (this.internalModel?.values?.isEmpty() != false) {
+		if (this.modelFlow.value?.values?.isEmpty() != false) {
 			return 0
 		}
-		var candidateUid: Int = this.internalModel?.values?.last()?.uid ?: 0
-		while(candidateUid in this.internalModelMap.keys) {
+		var candidateUid: Int = this.modelFlow.value?.values?.last()?.uid ?: 0
+		while (candidateUid in this.internalModelMap.keys) {
 			candidateUid++
 		}
 		return candidateUid
 	}
 
-	override fun updateQuote(quoteModel: QuoteModel) {
+	override suspend fun updateQuote(quoteModel: QuoteModel) {
 		synchronized(this) {
-			this.internalModel?.values?.replaceAll {
-				if (it.uid == quoteModel.uid) {
-					quoteModel
-				} else {
-					it
-				}
-			}
 			this.internalModelMap.put(key = quoteModel.uid, quoteModel)
 		}
+
+		this.modelFlow.emit(
+			this.modelFlow.value?.apply {
+				values.replaceAll {
+					if (it.uid == quoteModel.uid) {
+						quoteModel
+					} else {
+						it
+					}
+				}
+			}
+		)
 	}
 
-	override fun deleteQuote(quoteId: Int) {
+	override suspend fun deleteQuote(quoteId: Int) {
 		synchronized(this) {
 			this.internalModelMap[quoteId]?.let {
-				this.internalModel?.values?.remove(it)
 				this.internalModelMap.remove(quoteId)
 			}
 		}
-	}
 
-	override fun getQuoteBasedOnDayOfMonth(month: Int, dayOfMonth: Int, locale: Locale): String? {
-		synchronized(this) {
-			val quote: QuoteModel? = runCatching {
-				this.internalModel?.values?.first { value: QuoteModel ->
-					value.associatedMonth == month && value.associatedDayOfMonth == dayOfMonth
+		this.modelFlow.emit(
+			this.modelFlow.value?.apply {
+				values.removeIf {
+					it.uid == quoteId
 				}
-			}.getOrNull()
-			return when (locale.language) {
-				"en" -> quote?.value?.english
-				"fr" -> ""
-				else -> null
 			}
-		}
-	}
-
-	override fun getGregorianCalendarOptions(): GregorianCalendarOptionsModel? {
-		synchronized(this) {
-			return this.internalModel?.gregorianCalendarOptionsModel
-		}
-	}
-
-	override fun getLunarCalendarOptions(): LunarCalendarOptionsModel? {
-		synchronized(this) {
-			return this.internalModel?.lunarCalendarOptionsModel
-		}
-	}
-
-	override fun getHebrewCalendarOptions(): HebrewCalendarOptionsModel? {
-		synchronized(this) {
-			return internalModel?.hebrewCalendarOptionsModel
-		}
-	}
-
-	override fun getQuoteList(): MutableList<QuoteModel>? {
-		synchronized(this) {
-			return internalModel?.values
-		}
+		)
 	}
 
 	override suspend fun saveToDefaultFile() {
 		synchronized(this) {
-			ioService.getAppSpecificFileOutputStream(DEFAULT_FILE_PATH)
+			ioService.getAppSpecificFileOutputStream(
+				if (flagsService.debug.get()) DEBUG_DEFAULT_FILE_PATH
+				else DEFAULT_FILE_PATH
+			)
 				.use { outputStream: FileOutputStream ->
 					this.getProto()?.writeDelimitedTo(
 						outputStream
@@ -145,5 +146,6 @@ class QuotesManager @Inject constructor(
 
 	companion object {
 		const val DEFAULT_FILE_PATH = "default.ydw"
+		const val DEBUG_DEFAULT_FILE_PATH = "debug_default.ydw"
 	}
 }

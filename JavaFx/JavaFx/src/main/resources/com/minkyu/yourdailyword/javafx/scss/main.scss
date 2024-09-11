@@ -1,0 +1,154 @@
+@import 'color-constants';
+@import 'buttons';
+@import 'checkbox';
+@import 'containers';
+
+.primary-text-area {
+    -fx-background-color: -primary-background-color;
+    -fx-faint-focus-color: -primary-background-color;
+    -fx-focus-color: -primary-background-color;
+    -fx-border-color: -primary-background-color;
+    -fx-border-radius: 0;
+    -fx-text-fill: -secondary-text-color;
+
+    .content {
+        -fx-background-color: -primary-background-color;
+        -fx-border-color: -primary-background-color;
+    }
+
+    &focused  {
+        .content {
+            -fx-background-color: -primary-background-color;
+        }
+    }
+}
+
+.rounded-text-box {
+    -fx-background-color: -primary-background-color;
+    -fx-text-fill: -secondary-text-color;
+    -fx-background-radius: 15px;
+    -fx-border-color: -secondary-border-color;
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-padding: 5px;
+
+    &:focused {
+        -fx-border-color: -primary-border-color;
+        -fx-border-width: 1.5px;
+        -fx-padding: 4.5px;
+    }
+}
+
+.standard-menu-bar {
+    -fx-background-color: -primary-background-color;
+    -fx-text-fill: -secondary-text-color;
+    -fx-border-color: -primary-border-color;
+    -fx-border-style: none none solid none;
+
+    .container {
+        -fx-background-color: -primary-background-color;
+        -fx-text-fill: -secondary-text-color;
+
+        .menu-button {
+            -fx-background-color: -primary-background-color;
+            -fx-text-fill: -secondary-text-color;
+
+            &:hover {
+                -fx-background-color: -secondary-background-color;
+            }
+
+            .label {
+                -fx-text-fill: -secondary-text-color;
+            }
+        }
+
+    }
+
+    .context-menu {
+        -fx-background-color: -primary-background-color;
+        -fx-text-fill: -secondary-text-color;
+        -fx-border-color: -primary-border-color;
+        -fx-border-style: solid solid solid solid;
+    }
+}
+
+.standard-menu {
+    -fx-background-color: -primary-background-color;
+    -fx-text-fill: -secondary-text-color;
+}
+
+.standard-menu-item {
+    -fx-background-color: -primary-background-color;
+    -fx-text-fill: -secondary-text-color;
+
+    .label {
+        -fx-text-fill: -secondary-text-color;
+    }
+
+    &:hover {
+        -fx-background-color: -secondary-background-color;
+    }
+}
+
+.standard-separator {
+    -fx-background-color: -primary-border-color;
+    -fx-border-color: -primary-border-color;
+    -fx-border-width: 0px;
+
+    .line {
+        -fx-background-color: -primary-border-color;
+        -fx-border-color: -primary-border-color;
+        -fx-border-width: 0.5px;
+    }
+}
+
+.standard-combo-box {
+    -fx-background-color: -primary-background-color;
+    -fx-text-fill: -secondary-text-color;
+    -fx-border-color: -primary-border-color;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+
+    &:editable {
+        -fx-background-color: -text-field-background-color;
+        -fx-border-color: -primary-border-color;
+        -fx-border-width: 1.5px;
+        -fx-padding: 4.5px;
+    }
+
+    &:editable:focused {
+        -fx-border-color: -primary-border-color;
+        -fx-border-width: 1.5px;
+        -fx-padding: 4.5px;
+    }
+
+    .list-cell {
+        -fx-background-color: -primary-background-color;
+        -fx-text-fill: -secondary-text-color;
+
+        &:hover {
+            -fx-background-color: -secondary-background-color;
+        }
+    }
+
+    .combo-box-popup .list-view {
+        -fx-background-color: -primary-background-color;
+        -fx-text-fill: -secondary-text-color;
+        -fx-border-color: -primary-border-color;
+        -fx-border-style: solid solid solid solid;
+    }
+
+    .combo-box-popup .list-cell {
+        -fx-background-color: -primary-background-color;
+        -fx-text-fill: -secondary-text-color;
+
+        &:hover {
+            -fx-background-color: -secondary-background-color;
+        }
+    }
+}
+
+.standard-label {
+    -fx-text-fill: -secondary-text-color;
+}

@@ -373,14 +373,10 @@ fun AddIndividualPageView(
 					)
 				}
 
-				val onSuccessMessage: String = stringResource(R.string.add_quote_success_message)
-				val onFailureMessage: String = stringResource(R.string.add_quote_failure_message)
 				PrimaryButton(
 					onClick = {
 						viewModel.onAddAndSave(
 							uiState = uiState,
-							onSuccessMessage = onSuccessMessage,
-							onFailureMessage = onFailureMessage,
 						)
 					},
 				) {

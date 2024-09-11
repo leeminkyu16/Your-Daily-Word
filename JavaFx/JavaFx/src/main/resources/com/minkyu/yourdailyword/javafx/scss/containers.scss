@@ -1,0 +1,16 @@
+@use 'color-constants' as colors;
+
+.standard-grid-pane {
+  -fx-background-color: -primary-background-color;
+  -fx-text-fill: -secondary-text-color;
+}
+
+.standard-border-pane {
+  -fx-background-color: -primary-background-color;
+  -fx-text-fill: -secondary-text-color;
+}
+
+.standard-vbox {
+  -fx-background-color: -primary-background-color;
+  -fx-text-fill: -secondary-text-color;
+}

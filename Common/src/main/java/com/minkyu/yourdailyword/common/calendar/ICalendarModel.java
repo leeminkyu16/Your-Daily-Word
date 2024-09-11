@@ -17,5 +17,9 @@ public interface ICalendarModel {
 
 	String getMonthKey();
 
+	String monthIntToMonthText(int month);
+
+	String monthIntToMonthKey(int month);
+
 	int getYear();
 }

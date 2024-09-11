@@ -18,19 +18,22 @@ public class QuotesModel implements ProtoBasedModel<Quotes> {
 	public final LunarCalendarOptionsModel lunarCalendarOptionsModel;
 	@Nullable
 	public final HebrewCalendarOptionsModel hebrewCalendarOptionsModel;
+	public long lastModified;
 
 	public QuotesModel(
 		@NotNull CalendarTypeModel type,
 		@NotNull ArrayList<QuoteModel> values,
 		@Nullable GregorianCalendarOptionsModel gregorianCalendarOptionsModel,
 		@Nullable LunarCalendarOptionsModel lunarCalendarOptionsModel,
-		@Nullable HebrewCalendarOptionsModel hebrewCalendarOptionsModel
+		@Nullable HebrewCalendarOptionsModel hebrewCalendarOptionsModel,
+		long lastModified
 	) {
 		this.type = type;
 		this.values = values;
 		this.gregorianCalendarOptionsModel = gregorianCalendarOptionsModel;
 		this.lunarCalendarOptionsModel = lunarCalendarOptionsModel;
 		this.hebrewCalendarOptionsModel = hebrewCalendarOptionsModel;
+		this.lastModified = lastModified;
 	}
 
 	synchronized public Quotes toProto() {
@@ -55,6 +58,7 @@ public class QuotesModel implements ProtoBasedModel<Quotes> {
 			builder
 				.setHebrewCalendarOptions(this.hebrewCalendarOptionsModel.toProto());
 		}
+		builder.setLastModified(this.lastModified);
 		return builder.build();
 	}
 
@@ -70,7 +74,8 @@ public class QuotesModel implements ProtoBasedModel<Quotes> {
 			).collect(Collectors.toCollection(ArrayList::new)),
 			GregorianCalendarOptionsModel.fromProto(proto.getGregorianCalendarOptions()),
 			LunarCalendarOptionsModel.fromProto(proto.getLunarCalendarOptions()),
-			HebrewCalendarOptionsModel.fromProto(proto.getHebrewCalendarOptions())
+			HebrewCalendarOptionsModel.fromProto(proto.getHebrewCalendarOptions()),
+			proto.getLastModified()
 		);
 	}
 }
